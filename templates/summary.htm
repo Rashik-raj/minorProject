@@ -1,0 +1,28 @@
+{% extends 'layout.htm' %} 
+{% load static %}
+{% block content %}
+<div class="container" style="min-height: 600px; padding-top:100px">
+    <div class="row">
+        <div class="col s10 offset-s1">
+          <div class="switch">
+            <label>
+              <span class="switch-toggle">Extractive</span>
+              <input type="checkbox" id="switch">
+              <span class="lever switch-toggle"></span>
+              <span class="switch-toggle">Abstractive</span>
+            </label>
+          </div>
+          <div id="extractive">
+            <h1 class="blue-text text-darken-2">Extractive Summary:</h1>            
+            {% for each_sentence in extractive %}
+                <li>{{ each_sentence }}</li>
+            {% endfor %}
+          </div>  
+          <div id="abstractive">
+              <h1 class="blue-text text-darken-2">Abstractive Summary:</h1>            
+                {{abstractive}}
+            </div>           
+        </div>
+    </div>
+</div>
+{% endblock %}

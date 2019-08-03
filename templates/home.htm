@@ -1,0 +1,42 @@
+{% extends 'layout.htm' %} 
+{% load static %}
+{% block content %}
+<!-- Header with full-height image -->
+<header class="bgimg-1 w3-display-container w3-grayscale-min">
+  <div class="w3-display-left w3-text-white" style="padding:48px">
+    <span class="w3-jumbo w3-hide-small">Start something that matters</span><br>
+    <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
+    <span class="w3-large">Know more from smaller text.</span>
+    <p><a href="#modal1" class="modal-trigger w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Get Your Summary</a></p>
+    
+  </div> 
+  <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+</header>
+<!--modal structure-->
+<div id="modal1" class="modal">
+    <form method="POST" action="{% url 'summarize' %}">
+        {% csrf_token %}
+        <div class="modal-content">
+            <h4>Enter Your Text or URL</h4>
+            <div class="input-field col s12">
+                <i class="fas fa-edit prefix"></i>
+                <textarea id="textarea1" class="materialize-textarea" name="data"></textarea>
+                <label for="textarea1">Text or URL</label>
+                <div class="card-panel cyan lighten-2 red-text text-darken-2" id="errorMsg" style="display: none;"></div> 
+            </div>    
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="modal-close waves-effect waves-green btn-flat">Dismiss</a>
+          <button type="reset" class="btn waves-effect waves-green"><i class="fas fa-eraser"</i></i> Reset</button>
+          <button type="submit" onclick="return validate()" class="btn waves-effect waves-green"><i class="fas fa-file-alt"</i></i> Summarize</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
