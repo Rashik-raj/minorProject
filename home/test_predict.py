@@ -1,11 +1,12 @@
 from .attention import AttentionLayer
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 from keras.preprocessing.text import Tokenizer 
 from keras.preprocessing.sequence import pad_sequences
 from keras import backend as K
 import tensorflow as tf
 from tensorflow.keras.layers import Input, LSTM, Embedding, Dense, Concatenate, TimeDistributed
 from tensorflow.keras.models import Model
-from tensorflow.keras.callbacks import EarlyStopping
 from .preprocessing import text_cleaner, convertSequence, getData
 import numpy as np
 import pandas as pd
