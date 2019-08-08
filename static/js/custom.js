@@ -20,4 +20,4 @@ $(document).ready(function(){
       $("#extractive").fadeToggle();
       $("#abstractive").fadeToggle();
     });
-  });
+});
