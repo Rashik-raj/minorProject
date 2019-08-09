@@ -1,19 +1,29 @@
 function validate()
 {
     data=document.getElementById('textarea1').value;
+    summaryType=document.getElementById('summaryType').value;
     errorMsg=document.getElementById('errorMsg');
     flag = false;
-    if (data){
-        flag = true;
-    }
-    else{
+    if (data==''){
         errorMsg.style.display="block";
         errorMsg.innerHTML="*** You must enter text or URL ***";
+        return flag
     }
-    return flag;
+    if (summaryType==''){
+        errorMsg.style.display="block";
+        errorMsg.innerHTML="*** You must select the type ***";
+        return flag;
+    }
+    if (data.includes('http') && summaryType=='abstractive'){
+        errorMsg.style.display="block";
+        errorMsg.innerHTML="*** You cannot select asbtractive for links right now ***";
+        return flag;
+    }
+    return true;
 }
 $(document).ready(function(){
     $('.modal').modal();
+    $('select').formSelect();
 });
 $(document).ready(function(){
     $(".switch-toggle").click(function(){

@@ -29,8 +29,16 @@
                 <i class="fas fa-edit prefix"></i>
                 <textarea id="textarea1" class="materialize-textarea" name="data"></textarea>
                 <label for="textarea1">Text or URL</label>
-                <div class="card-panel cyan lighten-2 red-text text-darken-2" id="errorMsg" style="display: none;"></div> 
-            </div>    
+            </div>
+            <div class="input-field col s12">
+              <select id="summaryType" name="summaryType">
+                <option value="" disabled selected>Choose the summary type</option>
+                <option value="extractive">Extractive</option>
+                <option value="abstractive">Abstractive</option>
+              </select>
+              <label>Summary Type</label>
+              <div class="card-panel cyan lighten-2 red-text text-darken-2" id="errorMsg" style="display: none;"></div>
+            </div>
         </div>
         <div class="modal-footer">
           <a href="#" class="modal-close waves-effect waves-green btn-flat">Dismiss</a>
