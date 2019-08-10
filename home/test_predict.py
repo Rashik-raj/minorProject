@@ -14,7 +14,7 @@ global graph
 #load data
 x_tr,x_val,y_tr,y_val = getData()
 max_text_len=30
-max_summary_len=10
+max_summary_len=8
 #prepare a tokenizer for reviews on training data
 x_tokenizer = Tokenizer() 
 x_tokenizer.fit_on_texts(list(x_tr))
@@ -125,7 +125,7 @@ decoder_outputs = decoder_dense(decoder_concat_input)
 model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
 model.compile(optimizer='rmsprop', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 #model.fit([x_tr,y_tr[:,:-1]], y_tr.reshape(y_tr.shape[0],y_tr.shape[1], 1)[:,1:] ,epochs=50,callbacks=[es],batch_size=128, validation_data=([x_val,y_val[:,:-1]], y_val.reshape(y_val.shape[0],y_val.shape[1], 1)[:,1:]))
-model.load_weights('home/trainedModel_weights.h5')
+model.load_weights('home/trainedModel_weights3.h5')
 graph = tf.compat.v1.get_default_graph()
 
 reverse_target_word_index=y_tokenizer.index_word
@@ -163,8 +163,7 @@ def decode_sequence(input_seq):
         decoder_outputs = decoder_dense(decoder_concat_input)
         model = Model([encoder_inputs, decoder_inputs], decoder_outputs)
         model.compile(optimizer='rmsprop', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-        #model.fit([x_tr,y_tr[:,:-1]], y_tr.reshape(y_tr.shape[0],y_tr.shape[1], 1)[:,1:] ,epochs=50,callbacks=[es],batch_size=128, validation_data=([x_val,y_val[:,:-1]], y_val.reshape(y_val.shape[0],y_val.shape[1], 1)[:,1:]))
-        model.load_weights('home/trainedModel_weights.h5')
+        model.load_weights('home/trainedModel_weights3.h5')
         ########### inferencing ###########
         encoder_model = Model(inputs=encoder_inputs,outputs=[encoder_outputs, state_h, state_c])
         # Decoder setup, Below tensors will hold the states of the previous time step

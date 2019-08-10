@@ -70,7 +70,7 @@ def getData():
 	data['cleaned_text']=cleaned_text
 	data['cleaned_summary']=cleaned_summary
 	max_text_len=30
-	max_summary_len=10
+	max_summary_len=8
 	cleaned_text =np.array(data['cleaned_text'])
 	cleaned_summary=np.array(data['cleaned_summary'])
 
