@@ -20,9 +20,9 @@ body, html {
 .footer-list{
   display: inline;
 }
-#extractive,#abstractive{
+#extractive,#extractiveGraph,#abstractive{
   min-height:600px;
 }
-#abstractive{
+#extractiveGraph{
   display: none;
 }

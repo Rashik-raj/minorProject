@@ -7,7 +7,12 @@ def index(request):
 
 def get_summary(request):
     text = request.POST['data']
-    # extractive is in list format
-    extractive = extractiveSummarizer(text)
-    abstractive = abstractiveSummarizer(text)
-    return render(request, 'summary.htm', {'extractive' : extractive, 'abstractive' : abstractive})
+    summaryType = request.POST['summaryType']
+    if summaryType == 'extractive':
+        # extractive is in list format
+        extractive = extractiveSummarizer(text)
+        return render(request, 'summary.htm', {'extractive' : extractive})
+    else:
+        abstractive = abstractiveSummarizer(text)
+        return render(request, 'summary.htm', {'abstractive' : abstractive})
+    

@@ -10,6 +10,7 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer as sumytoken
 from sumy.summarizers.lex_rank import LexRankSummarizer
 from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+from .graph import makeWordcloud, makeGraph
 
 def checkTextType(data):
     text = data
@@ -17,20 +18,21 @@ def checkTextType(data):
     text_type = "text"    
     if data[0:5] == "https" or data[0:4] == "http":
         text_type = "URL"
-
     #this section is performed only if provided data is URL
     if text_type == "URL":
         page = reqUrl(data)
         text = ""
         for paragraph in page.find_all('p'):
-            text += paragraph.text
-    
+            text += paragraph.text    
     return text
 
 def extractiveSummarizer(data):
     #checks for URL else simply returns text
     text = checkTextType(data)
-
+    #create wordcloud of input text        
+    makeWordcloud(text)
+    #create frequency graph of input text
+    makeGraph(text)
     text = re.sub(r'\[[0-9]*\]',' ',text)            
     text = re.sub(r'\s+',' ',text)    
     clean_text = text.lower()
@@ -39,6 +41,10 @@ def extractiveSummarizer(data):
     clean_text = re.sub(r'\s+',' ',clean_text)
     sentences = nltk.sent_tokenize(text)
     stop_words = nltk.corpus.stopwords.words('english')
+
+    sentenceLength = len(sentences)
+    if sentenceLength > 10:
+        sentenceLength = sentenceLength // 3
 
     word2count = {}  
     for word in nltk.word_tokenize(clean_text):     
@@ -62,11 +68,16 @@ def extractiveSummarizer(data):
                         sent2score[sentence]+=word2count[word]
 
 
-    best_sentences = heapq.nlargest(20,sent2score,key=sent2score.get)
+    best_sentences = heapq.nlargest(sentenceLength,sent2score,key=sent2score.get)
     result = []
+    text = ''
     for sentences in best_sentences:
         result.append(sentences)
-
+        text += sentences
+    #create wordcloud of summary    
+    makeWordcloud(text,1)
+    #create frequency graph of summary
+    makeGraph(text,1)
     return result
 
 def abstractiveSummarizer(data):

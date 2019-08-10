@@ -24,10 +24,8 @@ function validate()
 $(document).ready(function(){
     $('.modal').modal();
     $('select').formSelect();
-});
-$(document).ready(function(){
     $(".switch-toggle").click(function(){
-      $("#extractive").fadeToggle();
-      $("#abstractive").fadeToggle();
-    });
+        $("#extractive").fadeToggle();
+        $("#extractiveGraph").fadeToggle();
+      });
 });
