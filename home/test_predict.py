@@ -91,7 +91,7 @@ x_val=np.delete(x_val,ind, axis=0)
 
 latent_dim = 300
 embedding_dim=100
-tf.Session().run(tf.global_variables_initializer())
+tf.compat.v1.Session()
 # Encoder
 encoder_inputs = Input(shape=(max_text_len,))
 #embedding layer

@@ -1,1 +1,4 @@
 home/Reviews.csv
+assets/
+__pycache__
+env/
